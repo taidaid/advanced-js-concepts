@@ -30,9 +30,6 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 <p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 35.</p>
 <ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
 
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-<a href="#gdcalert2">alert2</a>
-<a href="#gdcalert3">alert3</a>
 <a href="#gdcalert4">alert4</a>
 <a href="#gdcalert5">alert5</a>
 <a href="#gdcalert6">alert6</a>
@@ -78,20 +75,6 @@ This guide is <span style="text-decoration:underline;">incomplete</span>! Please
 
 [Acknowledgements](#bookmark=id.1irietpnj5)
 
-Compiled by [Bryan Windsor](https://github.com/taidaid).
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image1.png "image_tooltip")
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image2.png "image_tooltip")
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image3.png "image_tooltip")
-
 ## JavaScript Foundation
 
 ### Section 1
@@ -112,9 +95,7 @@ Compiled by [Bryan Windsor](https://github.com/taidaid).
 
 _How the JS engine works_
 
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image4.png "image_tooltip")
+(https://imgur.com/AOq7MU5)
 
 - Parser
   - Lexical Analysis
@@ -1412,7 +1393,7 @@ ww3.totalPeaceTime()
 ##### Prototypal Inheritance
 
 - A prototype is a working **object** instance. Objects inherit directly from other objects.
-- ****proto**** is a reference to the parent object’s **prototype** property, e.g.
+- \***\*proto\*\*** is a reference to the parent object’s **prototype** property, e.g.
 
       ```
 
@@ -1582,8 +1563,8 @@ obj.__proto__ === Object.prototype // true
 
 - The **prototype ** property only belongs to functions, specifically, **constructor** functions.
   - The **Object** **constructor** creates an object wrapper.
-- The ****proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types**
-  - **Object.create()** can be used to create **objects** with its ****proto** ** property linked to the **prototype **property of the object passed as **Object.create()**’s argument
+- The \***\*proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types\*\*
+  - **Object.create()** can be used to create **objects** with its \***\*proto** ** property linked to the **prototype **property of the object passed as **Object.create()\*\*’s argument
 - **Object** is the base **function** (constructor) \* The root of everything in JavaScript is **Object** which is actually a **function**
 
           ```
