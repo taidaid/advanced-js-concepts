@@ -321,8 +321,9 @@ const human = { //allocate memory for an object and its values
 - Garbage collection refers to a process that automatically frees up memory as it is able
 - Garbage collection helps us avoid memory leaks
 - Memory leaks are a failure in a program to release discarded memory, causing impaired performance or failure.
-  _ Global variables
-  _ Event listeners \* For the case of observers, it is important to make explicit calls to remove them once they are not needed anymore (or the associated object is about to be made unreachable). In the past, this used to be particularly important as certain browsers (Internet Explorer 6) were not able to manage cyclic references well (see below for more info on that). Nowadays, most browsers can and will collect observer handlers once the observed object becomes unreachable, even if the listener is not explicitly removed. It remains good practice, however, to explicitly remove these observers before the object is disposed ([https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/](https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/))
+  - Global variables
+  - Event listeners
+    - For the case of observers, it is important to make explicit calls to remove them once they are not needed anymore (or the associated object is about to be made unreachable). In the past, this used to be particularly important as certain browsers (Internet Explorer 6) were not able to manage cyclic references well (see below for more info on that). Nowadays, most browsers can and will collect observer handlers once the observed object becomes unreachable, even if the listener is not explicitly removed. It remains good practice, however, to explicitly remove these observers before the object is disposed ([https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/](https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/))
 
 ```
 var element = document.getElementById('button');
@@ -375,7 +376,7 @@ element.parentNode.removeChild(element);
 
 - The environment in which the current code is being evaluated in. There can only be one execution context running at any point of time! This is because Javascript is single-threaded.
 - **arguments** is an object that is made available to **execution contexts** made with the **function** keyword
-  - Because **arguments **is an object, **Array** methods are not available
+  - Because **arguments** is an object, **Array** methods are not available
     - We can use **Array.from(arguments)** to create an array with the **arguments** values
   - The **spread** operator can be used to convert **arguments** in a **function** into an **Array**
 
