@@ -30,8 +30,6 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 <p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 35.</p>
 <ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
 
-<a href="#gdcalert4">alert4</a>
-<a href="#gdcalert5">alert5</a>
 <a href="#gdcalert6">alert6</a>
 <a href="#gdcalert7">alert7</a>
 <a href="#gdcalert8">alert8</a>
@@ -183,10 +181,7 @@ _Shows how JavaScript is translated into a lower-level language_
 
 
 
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image5.png "image_tooltip")
+![JS Engine Compiles to Machine Language](https://i.imgur.com/bwv6BvU.png "JS Engine Compiles to Machine Language")
 
 
 
