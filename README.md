@@ -324,12 +324,11 @@ const human = { //allocate memory for an object and its values
   _ Global variables
   _ Event listeners \* For the case of observers, it is important to make explicit calls to remove them once they are not needed anymore (or the associated object is about to be made unreachable). In the past, this used to be particularly important as certain browsers (Internet Explorer 6) were not able to manage cyclic references well (see below for more info on that). Nowadays, most browsers can and will collect observer handlers once the observed object becomes unreachable, even if the listener is not explicitly removed. It remains good practice, however, to explicitly remove these observers before the object is disposed ([https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/](https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/))
 
-              ```
-
-  var element = document.getElementById('button');
+```
+var element = document.getElementById('button');
 
 function onClick(event) {
-element.innerHtml = 'text';
+ element.innerHtml = 'text';
 }
 
 element.addEventListener('click', onClick);
@@ -339,7 +338,7 @@ element.parentNode.removeChild(element);
 // Now when element goes out of scope,
 // both element and onClick will be collected even in old browsers that don't handle cycles well.
 
-````
+```
 
 - Mark and Sweep
   - JS can mark what references and values in memory are still needed
@@ -353,7 +352,6 @@ element.parentNode.removeChild(element);
 - It is written in C++
 
 ![Node.js Runtime](https://i.imgur.com/1tkBNVF.png)
-
 
 ![Node.js vs. PHP](https://i.imgur.com/nrBQ5gy.png "Node.js single main thread vs PHP multi-threaded I/O blocking execution")
 
@@ -3214,4 +3212,7 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 ```
 
 ```
-````
+
+```
+
+```
