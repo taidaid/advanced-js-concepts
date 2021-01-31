@@ -287,25 +287,22 @@ In the [next article](https://hacks.mozilla.org/?p=30503), I’ll explain more a
 #### Call Stack + Memory Heap
 
 - Call Stack
-  _ The call stack stores function calls
-  _ Ensures the program runs in order
-  _ The first stack frame (on top) is program’s current ‘location’
-  _ First In, Last Out
-  _ **Global Execution Context** is called and is at bottom of **Call Stack**
-  _ First function is called and is added to top of **Call Stack**
-  _ First function ‘returns’ and it is popped off of the **Call Stack**
-  _ Repeat until program completes and Global Execution Context pops off the Call Stack \* Stack Overflow is when there are too many stack frames, e.g.
+  - The call stack stores function calls
+  - Ensures the program runs in order
+  - The first stack frame (on top) is program’s current ‘location’
+  - First In, Last Out
+  - **Global Execution Context** is called and is at bottom of **Call Stack**
+  - First function is called and is added to top of **Call Stack**
+  - First function ‘returns’ and it is popped off of the **Call Stack**
+  - Repeat until program completes and Global Execution Context pops off the Call Stack \* Stack Overflow is when there are too many stack frames, e.g.
+  - Memory Heap
+    - Stores values and references
 
-          ```
-
-  function inception() {
+```
+function inception() {
   inception()
-  }
-
-````
-
-    *   Memory Heap
-        *   Stores values and references
+}
+```
 
             ```
 
@@ -3219,4 +3216,7 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 <p id="gdcalert35" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image35.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert36">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image35.png "image_tooltip")
-````
+
+```
+
+```
