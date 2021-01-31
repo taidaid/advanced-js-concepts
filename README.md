@@ -115,8 +115,7 @@ _How the JS engine works_
   _ Hidden classes
   _ When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, e.g.
 
-              ```
-
+```
   function Animal(x, y) {
   this.x = x;
   this.y = y;
@@ -128,10 +127,7 @@ _How the JS engine works_
   obj1.b = 2
   obj2.b = 2
   obj2.a = 1
-
 ```
-
-
 
     the compiler will de-optimize the code
 
@@ -144,67 +140,43 @@ _How the JS engine works_
     *   This means that we should either set all possible properties in the constructor of a class
     *   Or we can be careful to always define new properties in the same order
 
-
-
 ---
-
-
 
 #### JavaScript Runtime
 
-
-
-*   The **runtime** environment _provides the built-in libraries that are available to the program at runtime_ (during execution). So, if you're going to use the Window object or the DOM API in the browser, those would be included in the browser's JS runtime environment. A Node.js runtime includes different libraries, say, the Cluster and FileSystem APIs. Both runtimes include the built-in data types and common facilities such as the Console object.
-
+- The **runtime** environment _provides the built-in libraries that are available to the program at runtime_ (during execution). So, if you're going to use the Window object or the DOM API in the browser, those would be included in the browser's JS runtime environment. A Node.js runtime includes different libraries, say, the Cluster and FileSystem APIs. Both runtimes include the built-in data types and common facilities such as the Console object.
 
 #### JavaScript Engine vs. Runtime
 
-
-
-*   The distinction between the two is not always clear and you'll find that the terms are commonly used interchangeably.
-*   Chrome and Node.js share the _same **engine **_(Google's V8), but they have _different **runtime **_(execution) environments.
-*   In a way, the **runtime **is to the **engine **what the linker is to the compiler in a traditional compiled language.
+- The distinction between the two is not always clear and you'll find that the terms are commonly used interchangeably.
+- Chrome and Node.js share the _same **engine **_(Google's V8), but they have _different **runtime **_(execution) environments.
+- In a way, the **runtime **is to the **engine **what the linker is to the compiler in a traditional compiled language.
 
 [[https://www.quora.com/What-is-the-difference-between-javascript-engine-and-javascript-runtime](https://www.quora.com/What-is-the-difference-between-javascript-engine-and-javascript-runtime)]
 
-
-
 ---
 
-
-
 #### <p style="text-align: right">
-Interpreter/Compiler/JIT Compiler</p>
 
+Interpreter/Compiler/JIT Compiler</p>
 
 _Shows how JavaScript is translated into a lower-level language_
 
-
-
 ![JS Engine Compiles to Machine Language](https://i.imgur.com/bwv6BvU.png "JS Engine Compiles to Machine Language")
-
-
 
 ##### Interpreter vs Compiler
 
-
-
-*   Interpreter
-    *   Line by line
-    *   Faster to start
-*   Compiler
-    *   Reads entire file and translates to a lower level language
-    *   Once begun, is faster than interpreted by optimizing into a lower level language
-    *   Not perfect, can accidentally de-optimize code
-
-
+- Interpreter
+  - Line by line
+  - Faster to start
+- Compiler
+  - Reads entire file and translates to a lower level language
+  - Once begun, is faster than interpreted by optimizing into a lower level language
+  - Not perfect, can accidentally de-optimize code
 
 ---
 
-
-
 ##### JIT Compiler
-
 
 ###### “Just-In-Time” Compiler
 
@@ -216,11 +188,7 @@ At first, the monitor just runs everything through the interpreter.
 
 If the same lines of code are run a few times, that segment of code is called warm. If it’s run a lot, then it’s called hot.
 
-
-
 ---
-
-
 
 ###### Baseline compiler
 
@@ -236,11 +204,7 @@ It doesn’t want to take too much time, though, because it doesn’t want to ho
 
 However, if the code is really hot—if it’s being run a whole bunch of times—then it’s worth taking the extra time to make more optimizations.
 
-
-
 ---
-
-
 
 ###### Optimizing compiler
 
@@ -262,13 +226,11 @@ Usually optimizing compilers make code faster, but sometimes they can cause unex
 
 Most browsers have added limits to break out of these optimization/deoptimization cycles when they happen. If the JIT has made more than, say, 10 attempts at optimizing and keeps having to throw it out, it will just stop trying.
 
-
 ###### An example optimization: Type specialization
 
 There are a lot of different kinds of optimizations, but I want to take a look at one type so you can get a feel for how optimization happens. One of the biggest wins in optimizing compilers comes from something called type specialization.
 
 The dynamic type system that JavaScript uses requires a little bit of extra work at runtime. For example, consider this code:
-
 
 ```
 
@@ -279,8 +241,7 @@ sum += arr[i];
 }
 }
 
-````
-
+```
 
 The `+=` step in the loop may seem simple. It may seem like you can compute this in one step, but because of dynamic typing, it takes more steps than you would expect.
 
@@ -292,13 +253,9 @@ The way the JIT handles this is by compiling multiple baseline stubs. If a piece
 
 This means that the JIT has to ask a lot of questions before it chooses a stub.
 
-
-
 <p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image6.png "image_tooltip")
-
 
 Because each line of code has its own set of stubs in the baseline compiler, the JIT needs to keep checking the types each time the line of code is executed. So for each iteration through the loop, it will have to ask the same questions.
 
@@ -308,18 +265,15 @@ In the optimizing compiler, the whole function is compiled together. The type ch
 
 Some JITs optimize this even further. For example, in Firefox there’s a special classification for arrays that only contain integers. If `arr` is one of these arrays, then the JIT doesn’t need to check if `arr[i]` is an integer. This means that the JIT can do all of the type checks before it enters the loop.
 
-
 ###### Conclusion
 
 That is the JIT in a nutshell. It makes JavaScript run faster by monitoring the code as it’s running it and sending hot code paths to be optimized. This has resulted in many-fold performance improvements for most JavaScript applications.
 
 Even with these improvements, though, the performance of JavaScript can be unpredictable. And to make things faster, the JIT has added some overhead during runtime, including:
 
-
-
-*   optimization and deoptimization
-*   memory used for the monitor’s bookkeeping and recovery information for when bailouts happen
-*   memory used to store baseline and optimized versions of a function
+- optimization and deoptimization
+- memory used for the monitor’s bookkeeping and recovery information for when bailouts happen
+- memory used to store baseline and optimized versions of a function
 
 There’s room for improvement here: that overhead could be removed, making performance more predictable. And that’s one of the things that WebAssembly does.
 
@@ -327,43 +281,32 @@ In the [next article](https://hacks.mozilla.org/?p=30503), I’ll explain more a
 
 [by [Lin Clark](https://twitter.com/linclark) at [A crash course in just-in-time (JIT) compilers](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/)]
 
-
-
 ---
-
-
 
 #### Writing Optimized Code
 
-
-
-*   Initialize objects of the same class in the same order
-
-
+- Initialize objects of the same class in the same order
 
 ---
 
-
-
 #### Call Stack + Memory Heap
 
+- Call Stack
+  _ The call stack stores function calls
+  _ Ensures the program runs in order
+  _ The first stack frame (on top) is program’s current ‘location’
+  _ First In, Last Out
+  _ **Global Execution Context** is called and is at bottom of **Call Stack**
+  _ First function is called and is added to top of **Call Stack**
+  _ First function ‘returns’ and it is popped off of the **Call Stack**
+  _ Repeat until program completes and Global Execution Context pops off the Call Stack \* Stack Overflow is when there are too many stack frames, e.g.
 
+          ```
 
-*   Call Stack
-    *   The call stack stores function calls
-    *   Ensures the program runs in order
-    *   The first stack frame (on top) is program’s current ‘location’
-    *   First In, Last Out
-        *   **Global Execution Context** is called and is at bottom of **Call Stack**
-        *   First function is called and is added to top of **Call Stack**
-        *   First function ‘returns’ and it is popped off of the **Call Stack**
-        *   Repeat until program completes and Global Execution Context pops off the Call Stack
-    *   Stack Overflow is when there are too many stack frames, e.g.
+  function inception() {
+  inception()
+  }
 
-        ```
-function inception() {
-	inception()
-}
 ````
 
     *   Memory Heap
@@ -380,31 +323,24 @@ last: 'James'
 
 ````
 
-
-
-
 #####
 
 ---
 
-
-
 #### Garbage Collection
 
+- Garbage collection refers to a process that automatically frees up memory as it is able
+- Garbage collection helps us avoid memory leaks
+- Memory leaks are a failure in a program to release discarded memory, causing impaired performance or failure.
+  _ Global variables
+  _ Event listeners \* For the case of observers, it is important to make explicit calls to remove them once they are not needed anymore (or the associated object is about to be made unreachable). In the past, this used to be particularly important as certain browsers (Internet Explorer 6) were not able to manage cyclic references well (see below for more info on that). Nowadays, most browsers can and will collect observer handlers once the observed object becomes unreachable, even if the listener is not explicitly removed. It remains good practice, however, to explicitly remove these observers before the object is disposed ([https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/](https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/))
 
+              ```
 
-*   Garbage collection refers to a process that automatically frees up memory as it is able
-*   Garbage collection helps us avoid memory leaks
-*   Memory leaks are a failure in a program to release discarded memory, causing impaired performance or failure.
-    *   Global variables
-    *   Event listeners
-        *   For the case of observers, it is important to make explicit calls to remove them once they are not needed anymore (or the associated object is about to be made unreachable). In the past, this used to be particularly important as certain browsers (Internet Explorer 6) were not able to manage cyclic references well (see below for more info on that). Nowadays, most browsers can and will collect observer handlers once the observed object becomes unreachable, even if the listener is not explicitly removed. It remains good practice, however, to explicitly remove these observers before the object is disposed ([https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/](https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/))
-
-            ```
-var element = document.getElementById('button');
+  var element = document.getElementById('button');
 
 function onClick(event) {
-    element.innerHtml = 'text';
+element.innerHtml = 'text';
 }
 
 element.addEventListener('click', onClick);
@@ -413,6 +349,7 @@ element.removeEventListener('click', onClick);
 element.parentNode.removeChild(element);
 // Now when element goes out of scope,
 // both element and onClick will be collected even in old browsers that don't handle cycles well.
+
 ````
 
 - Mark and Sweep
@@ -562,13 +499,14 @@ var a, b; //Declare both a & b for hoisting
 
 ````
 
+- The above code is equivalent to the below code due to **hoisting**.
 
-*   The above code is equivalent to the below code due to **hoisting**.
+      ```
 
-    ```
-var a;
-console.log(a); // undefined
-a=3;
+  var a;
+  console.log(a); // undefined
+  a=3;
+
 ````
 
 ###### const/let
@@ -616,19 +554,18 @@ myFunction(10, 2); // Will return 20
 
 ````
 
+- The function above does not belong to any object. But in JavaScript there is always a default global object.
+- In HTML the default global object is the HTML page itself, so the function above "belongs" to the HTML page.
+- In a browser the page object is the browser window. The function above automatically becomes a window function.
+- myFunction() and window.myFunction() is the same function:
 
+      ```
 
+  function myFunction(a, b) {
+  return a \* b;
+  }
+  window.myFunction(10, 2); // Will also return 20
 
-*   The function above does not belong to any object. But in JavaScript there is always a default global object.
-*   In HTML the default global object is the HTML page itself, so the function above "belongs" to the HTML page.
-*   In a browser the page object is the browser window. The function above automatically becomes a window function.
-*   myFunction() and window.myFunction() is the same function:
-
-    ```
-function myFunction(a, b) {
-  return a * b;
-}
-window.myFunction(10, 2);    // Will also return 20
 ````
 
 ##### Invoking a Function as a Method
@@ -649,28 +586,26 @@ window.myFunction(10, 2);    // Will also return 20
 
 ````
 
-
-*   The fullName method is a function. The function belongs to the object. myObject is the owner of the function.
-*   The thing called this, is the object that "owns" the JavaScript code. In this case the value of this is myObject.
-
+- The fullName method is a function. The function belongs to the object. myObject is the owner of the function.
+- The thing called this, is the object that "owns" the JavaScript code. In this case the value of this is myObject.
 
 ##### Invoking a Function with a Function Constructor
 
+- If a **function invocation **is preceded with the _new_ keyword, it is a _constructor_ invocation.
+- It looks like you create a new function, but since JavaScript functions are objects you actually create a new object:
 
+      ```
 
-*   If a **function invocation **is preceded with the _new_ keyword, it is a _constructor_ invocation.
-*   It looks like you create a new function, but since JavaScript functions are objects you actually create a new object:
-
-    ```
-// This is a function constructor:
-function myFunction(arg1, arg2) {
+  // This is a function constructor:
+  function myFunction(arg1, arg2) {
   this.firstName = arg1;
-  this.lastName  = arg2;
-}
+  this.lastName = arg2;
+  }
 
 // This creates a new object
 var x = new myFunction("John", "Doe");
-x.firstName;                             // Will return "John"
+x.firstName; // Will return "John"
+
 ````
 
 - A constructor invocation creates a new object. The new object inherits the properties and methods from its constructor.
@@ -928,23 +863,24 @@ this
 
 ````
 
+- **bind()** is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
 
-*   **bind()** is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
+      ```
 
-    ```
-var module = {
+  var module = {
   x: 42,
   getX: function() {
-    return this.x;
+  return this.x;
   }
-}
-var unboundGetX = module.getX;
-console.log(unboundGetX()); // The function gets invoked at the global scope
-// expected output: undefined
+  }
+  var unboundGetX = module.getX;
+  console.log(unboundGetX()); // The function gets invoked at the global scope
+  // expected output: undefined
 
 var boundGetX = unboundGetX.bind(module);
 console.log(boundGetX());
 // expected output: 42
+
 ````
 
 <p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
@@ -966,20 +902,21 @@ console.log(boundGetX());
 
 ````
 
+- Roughly, a **statement **performs an action. **Loops **and **if statements** are examples of statements. A program is basically a sequence of statements (we’re ignoring declarations here). Wherever JavaScript expects a statement, you can also write an expression. Such a statement is called an _expression statement_. The reverse does not hold: you cannot write a statement where JavaScript expects an expression. For example, an if statement cannot become the argument of a function.
+- **Expression**: produces a value
+- **Statement**: performs an action
+- **Expression statement**: produces a value and performs an action
+- The following is an example of an **\_if \_statement**:
 
-*   Roughly, a **statement **performs an action. **Loops **and **if statements** are examples of statements. A program is basically a sequence of statements (we’re ignoring declarations here). Wherever JavaScript expects a statement, you can also write an expression. Such a statement is called an _expression statement_. The reverse does not hold: you cannot write a statement where JavaScript expects an expression. For example, an if statement cannot become the argument of a function.
-*   **Expression**: produces a value
-*   **Statement**: performs an action
-*   **Expression statement**: produces a value and performs an action
-*   The following is an example of an **_if _statement**:
+      ```
 
-    ```
-var x;
-if (y >= 0) {
-    x = y;
-} else {
-    x = -y;
-}
+  var x;
+  if (y >= 0) {
+  x = y;
+  } else {
+  x = -y;
+  }
+
 ````
 
 - Expressions have an analog, the conditional operator. The above statements are equivalent to the following statement.
@@ -1008,20 +945,19 @@ if (y >= 0) {
 
 ````
 
+- **Immediately Invoked Function Expressions** have been used in the past, before modules, to avoid polluting the namespace. It does this by limiting the scope of variables in the function to the function scope
 
+      ```
 
-
-*   **Immediately Invoked Function Expressions** have been used in the past, before modules, to avoid polluting the namespace. It does this by limiting the scope of variables in the function to the function scope
-
-    ```
-var script1 = (function () {
+  var script1 = (function () {
   function a() {
-    return 5;
+  return 5;
   }
-    return {
-      a: a
-	}
-})()
+  return {
+  a: a
+  }
+  })()
+
 ````
 
 #### Use Strict
@@ -1053,12 +989,13 @@ var script1 = (function () {
 
 ````
 
+- **Dynamically typed** languages infer variable types at runtime. This means once your code is run the compiler/interpreter will see your variable and its value then decide what type it is. The type is still enforced here, it just decides what the type is.
+- **Dynamic Typing **is exemplified by JavaScript’s use of ‘var, const, let’ to declare variables. The compiler takes responsibility for determining the type of the value
 
-*   **Dynamically typed** languages infer variable types at runtime. This means once your code is run the compiler/interpreter will see your variable and its value then decide what type it is. The type is still enforced here, it just decides what the type is.
-*   **Dynamic Typing **is exemplified by JavaScript’s use of ‘var, const, let’ to declare variables. The compiler takes responsibility for determining the type of the value
+      ```
 
-    ```
-let a = 100 // compiler determines it is an integer
+  let a = 100 // compiler determines it is an integer
+
 ````
 
 - Strong vs Weak Typing \* **Strong Typing** _does not_ allow different value types to interact, e.g.
@@ -1070,12 +1007,13 @@ let a = 100 // compiler determines it is an integer
 
 ````
 
-
     *   **Weak Typing** _does_ allow different value types to interact, e.g. **coercing **an integer into its string equivalent when interacting with a string
 
         ```
+
 var hello = 'hello'
 hello + 17 // 'hello17'
+
 ````
 
     *   **Weakly typed** languages allow types to be inferred as another type. For example, 1 + '2' // '12' In JS it sees you’re trying to add a number with a string — an invalid operation — so it coerces your number into a string and results in the string ‘12’.
@@ -1104,11 +1042,12 @@ hello + 17 // 'hello17'
 
 ````
 
+- It works some like the below:
 
-*   It works some like the below:
+      ```
 
-    ```
-Boolean(true).toString() === 'true'
+  Boolean(true).toString() === 'true'
+
 ````
 
 ---
@@ -1129,15 +1068,16 @@ Boolean(true).toString() === 'true'
 
 ````
 
+- **Pass by Reference** is used with objects
 
-*   **Pass by Reference** is used with objects
+      ```
 
-    ```
-let a = {a: 1, b: 2}
-let b = a;
-a.b = 3;
-console.log(a) // {a: 1, b: 3}
-console.log(b) // {a: 1, b: 3}
+  let a = {a: 1, b: 2}
+  let b = a;
+  a.b = 3;
+  console.log(a) // {a: 1, b: 3}
+  console.log(b) // {a: 1, b: 3}
+
 ````
 
 - To **shallow clone** an object we can use **Object.assign **or the **rest operator**
@@ -1153,15 +1093,16 @@ console.log(b) // {a:1, b:2}
 
 ````
 
+- To clone an array, we can use:
 
-*   To clone an array, we can use:
+      ```
 
-    ```
-let a = [1,2,3]
-let b = [].concat(a)
-a[0] = 5
-console.log(a) // [5,2,3]
-console.log(b) // [1,2,3]
+  let a = [1,2,3]
+  let b = [].concat(a)
+  a[0] = 5
+  console.log(a) // [5,2,3]
+  console.log(b) // [1,2,3]
+
 ````
 
 - To **deep clone** an object we need to **stringify **and **parse **with **JSON** \* This is because of **pass by reference**, when objects are declared, a memory location, “**reference**”, is passed, rather than the object value being copied.
@@ -1173,44 +1114,31 @@ console.log(b) // [1,2,3]
 
 ````
 
-
-
-
-
 ---
-
-
 
 #### Type Coercion
 
-
-
-*   Type Coercion is the use of operators to coerce a type change in a value
-*   **Try to avoid type coercion as it is difficult to read and predict**
-
-
+- Type Coercion is the use of operators to coerce a type change in a value
+- **Try to avoid type coercion as it is difficult to read and predict**
 
 <p id="gdcalert15" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image15.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert16">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image15.png "image_tooltip")
 
+- JavaScript provides three different value-comparison operations:
+  - **===** - Strict Equality Comparison ("strict equality", "identity", "triple equals")
+  - **== **- Abstract Equality Comparison ("loose equality", "double equals")
+  - **Object.is** provides SameValue (new in ES2015).
+- Which operation you choose depends on what sort of comparison you are looking to perform. Briefly:
+  _ double equals (==) will perform a type conversion when comparing two things, and will handle NaN, -0, and +0 specially to conform to IEEE 754 (so NaN != NaN, and -0 == +0);
+  _ triple equals (===) will do the same comparison as double equals (including the special handling for NaN, -0, and +0) but without type conversion; if the types differ, false is returned. \* Object.is does no type conversion and no special handling for NaN, -0, and +0 (giving it the same behavior as === except on those special numeric values).
 
+          ```
 
+  1 == "1" // true
+  1 === 1 // false
+  NaN === NaN // false
 
-*   JavaScript provides three different value-comparison operations:
-    *   **===** - Strict Equality Comparison ("strict equality", "identity", "triple equals")
-    *   **== **- Abstract Equality Comparison ("loose equality", "double equals")
-    *   **Object.is** provides SameValue (new in ES2015).
-*   Which operation you choose depends on what sort of comparison you are looking to perform. Briefly:
-    *   double equals (==) will perform a type conversion when comparing two things, and will handle NaN, -0, and +0 specially to conform to IEEE 754 (so NaN != NaN, and -0 == +0);
-    *   triple equals (===) will do the same comparison as double equals (including the special handling for NaN, -0, and +0) but without type conversion; if the types differ, false is returned.
-    *   Object.is does no type conversion and no special handling for NaN, -0, and +0 (giving it the same behavior as === except on those special numeric values).
-
-        ```
-1 == "1" // true
-1 === 1 // false
-NaN === NaN // false
 ````
 
 <p id="gdcalert16" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert17">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
@@ -1244,15 +1172,15 @@ NaN === NaN // false
 
 ````
 
+- **Bracket Notation** \* When working with **bracket notation**, property **keys** only have to be a **String**. They can include _any characters_, including spaces. _Variables \_may also be used \_as long as the variable resolves to a_ **String**.
 
-*   **Bracket Notation**
-    *   When working with **bracket notation**, property **keys** only have to be a **String**. They can include _any characters_, including spaces. _Variables _may also be used _as long as the variable resolves to a_ **String**.
+          ```
 
-        ```
-let arr = ['a','b','c'];
-let letter = arr[1];
-console.log(letter);
-// b
+  let arr = ['a','b','c'];
+  let letter = arr[1];
+  console.log(letter);
+  // b
+
 ````
 
 ---
@@ -1315,23 +1243,23 @@ incrementFn() //3
 
 ````
 
+- Memory Efficient \* By using **closures**, we can create variables that are stored in memory to be used in the future
 
-*   Memory Efficient
-    *   By using **closures**, we can create variables that are stored in memory to be used in the future
+          ```
 
-        ```
-const closureTest1 = (function() {
-	const bigArray = new Array(7000).fill('1')
-	console.log('created')
-	return function(index) {
-		return bigArray[index]
-		}
-	})()
-closureTest1(500)
-closureTest1(300)
-closureTest1(100)
-created //from console.log('created')
-//returned "1"
+  const closureTest1 = (function() {
+  const bigArray = new Array(7000).fill('1')
+  console.log('created')
+  return function(index) {
+  return bigArray[index]
+  }
+  })()
+  closureTest1(500)
+  closureTest1(300)
+  closureTest1(100)
+  created //from console.log('created')
+  //returned "1"
+
 ````
 
     *   A typical case without **closure **would cause the variable to be created and stored again each time it is needed. This is memory _inefficient_.
@@ -1353,32 +1281,30 @@ created //from console.log('created')
 
 ````
 
-
-
 [[JavaScript Function Closures](https://www.w3schools.com/js/js_function_closures.asp)]
 
+- Encapsulation
+  _ **Encapsulation** allows us to hide/show properties of functions
+  _ In the below example, we don’t want to expose the \_launch \_variable, so we do not return it
 
+          ```
 
-*   Encapsulation
-    *   **Encapsulation** allows us to hide/show properties of functions
-    *   In the below example, we don’t want to expose the _launch _variable, so we do not return it
+  const makeNuclearButton = () => {
+  let timeWithoutDestruction = 0;
+  const passTime = () => timeWithoutDestruction++;
+  const totalPeaceTime = () => timeWithoutDestruction;
+  const launch = () => {
+  timeWithoutDestruction = -1;
+  return '💥';
+  }
 
-        ```
-const makeNuclearButton = () => {
- let timeWithoutDestruction = 0;
- const passTime = () => timeWithoutDestruction++;
- const totalPeaceTime = () => timeWithoutDestruction;
- const launch = () => {
-   timeWithoutDestruction = -1;
-   return '💥';
- }
-
- setInterval(passTime, 1000);
- return {totalPeaceTime}
+setInterval(passTime, 1000);
+return {totalPeaceTime}
 }
 
 const ww3 = makeNuclearButton();
 ww3.totalPeaceTime()
+
 ````
 
 [[Encapsulation in JavaScript - Software Consulting](https://www.intertech.com/Blog/encapsulation-in-javascript/)]
@@ -1397,16 +1323,16 @@ ww3.totalPeaceTime()
 
 ````
 
+- The **prototype ** property only belongs to functions, specifically, **constructor** functions.
+  - The **Object** **constructor** creates an object wrapper.
+- The ****proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types**
+  - **Object.create()** can be used to create **objects** with its ****proto** ** property linked to the **prototype **property of the object passed as **Object.create()**’s argument
+- **Object** is the base **function** (constructor) \* The root of everything in JavaScript is **Object** which is actually a **function**
 
-*   The **prototype ** property only belongs to functions, specifically, **constructor** functions.
-    *   The **Object** **constructor** creates an object wrapper.
-*   The **__proto__ ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types**
-    *   **Object.create()** can be used to create **objects** with its **__proto__ ** property linked to the **prototype **property of the object passed as **Object.create()**’s argument
-*   **Object** is the base **function** (constructor)
-    *   The root of everything in JavaScript is **Object** which is actually a **function**
+          ```
 
-        ```
-typeof Object //"function"
+  typeof Object //"function"
+
 ````
 
     *   **Object **has the property **prototype** which is the **base object** for all things in JavaScript, including JavaScript functions
@@ -1473,87 +1399,55 @@ this
 
 ````
 
-
-
-
-*   “**this**” is the object which the function is a property of
-*   “**this**” gives functions access to their object and its properties
-*   “**this**” helps us execute the same code for multiple objects
-*   “**this**” can be thought of as “who called me?” i.e., what is to the left of the dot, such as window.a()
-*   “**this**” is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
-
-
+- “**this**” is the object which the function is a property of
+- “**this**” gives functions access to their object and its properties
+- “**this**” helps us execute the same code for multiple objects
+- “**this**” can be thought of as “who called me?” i.e., what is to the left of the dot, such as window.a()
+- “**this**” is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
 
 <p id="gdcalert18" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image18.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert19">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image18.png "image_tooltip")
-
-
-
 
 <p id="gdcalert19" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image19.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert20">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image19.png "image_tooltip")
 
-
-
-
-*   **Arrow functions** bind “this” to the lexical scope
-
-
+- **Arrow functions** bind “this” to the lexical scope
 
 <p id="gdcalert20" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image20.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert21">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image20.png "image_tooltip")
 
-
-
-
 ---
-
-
 
 #### “new” keyword
 
-
-
-*   Creates a blank, plain JavaScript **object**;
-*   Links (sets the **constructor **of) this **object **to another **object**;
-*   Passes the newly created **object **from Step 1 as the **this **context;
-*   Returns **this **if the function doesn't return its own **object**.
-
-
+- Creates a blank, plain JavaScript **object**;
+- Links (sets the **constructor **of) this **object **to another **object**;
+- Passes the newly created **object **from Step 1 as the **this **context;
+- Returns **this **if the function doesn't return its own **object**.
 
 ---
 
-
-
 #### “in” operator
 
-
-
-*   The **in operator** returns true if the specified property is in the specified object or its prototype chain.
-
+- The **in operator** returns true if the specified property is in the specified object or its prototype chain.
 
 ####
 
 ---
 
-
-
 #### Prototype
 
+- A **prototype **is a working **object** instance. Objects inherit directly from other objects.
+- ****proto**** is a reference to the parent object’s **prototype** property, e.g.
 
+      ```
 
-*   A **prototype **is a working **object** instance. Objects inherit directly from other objects.
-*   **__proto__** is a reference to the parent object’s **prototype** property, e.g.
+  const obj = {}
+  obj.**proto** === Object.prototype // true
 
-    ```
-const obj = {}
-obj.__proto__ === Object.prototype // true
 ````
 
 - The **prototype ** property only belongs to functions, specifically, **constructor** functions.
@@ -1568,11 +1462,12 @@ obj.__proto__ === Object.prototype // true
 
 ````
 
-
     *   **Object **has the property **prototype** which is the **base object** for all things in JavaScript, including JavaScript functions
 
         ```
+
 typeof Object.prototype // "object"
+
 ````
 
 ####
@@ -1752,73 +1647,53 @@ _An example of declarative code_
 
 ````
 
-
-
-
-
 <p id="gdcalert23" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image23.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert24">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image23.png "image_tooltip")
 
-
-
-
 ---
-
-
 
 #### Partial Application
 
-
-
-*   **Partial Application** is similar to **currying**
-*   It is a process of producing a function with a smaller number of parameters
-
+- **Partial Application** is similar to **currying**
+- It is a process of producing a function with a smaller number of parameters
 
 ####
 
 ---
-
-
 
 #### Partial Application vs. Currying
 
-
-
-*   **Currying **expects _one argument at a time_
-*   **Partial Application** expects the _rest _of the needed arguments on the _second call_
-
+- **Currying **expects _one argument at a time_
+- **Partial Application** expects the _rest \_of the needed arguments on the \_second call_
 
 ####
 
 ---
 
-
-
 #### Caching
 
+- **Caching** is a way to store values so you can use them later
 
+      ```
 
-*   **Caching** is a way to store values so you can use them later
-
-    ```
-function addTo80(n){
-	console.log('simulate long computation time')
-	return n + 80
-}
+  function addTo80(n){
+  console.log('simulate long computation time')
+  return n + 80
+  }
 
 let cache = {}
 
 function memoizedAddTo80(n) {
-	if (n in cache){
-		return cache[n];
-	} else {
-		console.log('simulate long computation time')
-		cache[n] = n + 80;
-		return cache[n];
-	}
+if (n in cache){
+return cache[n];
+} else {
+console.log('simulate long computation time')
+cache[n] = n + 80;
+return cache[n];
 }
+}
+
 ````
 
 ####
@@ -1918,36 +1793,27 @@ return newArr
 
 ````
 
-
-
-
 ---
-
-
 
 #### Referential Transparency
 
 **Referential Transparency** is generally defined as the fact that an expression, in a program, _may be replaced by its value_ (or anything having the same value) _without changing the result of the program_. This implies that methods should always return the same value for a given argument, without having any other effect.
 
-
-
 ---
-
-
 
 #### Compose
 
+- **Function composition **is an act or mechanism to _combine simple functions_ to build _more complicated ones_
 
+      ```
 
-*   **Function composition **is an act or mechanism to _combine simple functions_ to build _more complicated ones_
+  //Compose
+  const compose = (f,g) => (data) => f(g(data))
+  const multiplyBy3 = (num) => num\*3
+  const makePositive = (num) => Math.abs(num)
+  const multiplyBy3AndAbsolute = compose(multiplyBy3, makePositive)
+  multiplyBy3AndAbsolute(-50) // 150
 
-    ```
-//Compose
-const compose = (f,g) => (data) => f(g(data))
-const multiplyBy3 = (num) => num*3
-const makePositive = (num) => Math.abs(num)
-const multiplyBy3AndAbsolute = compose(multiplyBy3, makePositive)
-multiplyBy3AndAbsolute(-50) // 150
 ````
 
 ####
@@ -1964,14 +1830,14 @@ multiplyBy3AndAbsolute(-50) // 150
 
 ````
 
-
-
     ```
+
 const pipe = (f,g) => (data) => g(f(data))
-const multiplyBy3 = (num) => num*3
+const multiplyBy3 = (num) => num\*3
 const makePositive = (num) => Math.abs(num)
 const multiplyBy3AndAbsolute = pipe(multiplyBy3, makePositive)
 multiplyBy3AndAbsolute(-50) // 150
+
 ````
 
 ####
@@ -1988,10 +1854,10 @@ multiplyBy3AndAbsolute(-50) // 150
 
 ````
 
-
-
     ```
+
 const compose = (f,g) => (data) => f(g(data))
+
 ````
 
 ---
@@ -2532,53 +2398,38 @@ spawn('git', ['stuff'])
 
 ````
 
-
-
-
-*   **Concurrency** means multiple computations are happening at the same time.
+- **Concurrency** means multiple computations are happening at the same time.
 
 [[Concurrency in JavaScript.. Learn how to write asynchronous… | by Onejohi](https://medium.com/@onejohi/concurrency-in-javascript-f5bb387708d8)]
 
-
-
 <p id="gdcalert29" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image29.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert30">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image29.png "image_tooltip")
 
-
-
 ##### Web Workers
-
-
 
 <p id="gdcalert30" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image30.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert31">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image30.png "image_tooltip")
-
-
 
 ####
 
 ---
 
-
-
 ### Error Handling
 
+- Errors are used with the keyword **throw**
+- The **name** property refers to the general class of **Error**
+- The **message **property generally provides a more succinct message than one would get by converting the error object to a string.
+- The **stack** property traces the **Error**’s position in the call-stack back to the global context which is typically `&lt;anonymous>`
 
+      ```
 
-*   Errors are used with the keyword **throw**
-*   The **name** property refers to the general class of **Error**
-*   The **message **property generally provides a more succinct message than one would get by converting the error object to a string.
-*   The **stack** property traces the **Error**’s position in the call-stack back to the global context which is typically `&lt;anonymous>`
+  const c = new Error('again?')
+  console.log(c.name) // Error
+  console.log(c.message) // again?
+  console.log(c.stack) // Error: again?↵ at <anonymous>:1:11
 
-    ```
-const c = new Error('again?')
-console.log(c.name) // Error
-console.log(c.message) // again?
-console.log(c.stack) // Error: again?↵ at <anonymous>:1:11
 ````
 
 - The below example shows the **stack** property at work.
@@ -2596,39 +2447,33 @@ console.log(c.stack) // Error: again?↵ at <anonymous>:1:11
 
 ````
 
-
-*   **Error** types
-    *   **Error**, general error
-    *   **SyntaxError**, e.g. a misplaced comma
-    *   **ReferenceError**, e.g. undefined variable
-*   When an **Error** is thrown, it searches up the call-stack for a **catch**.
-*   If no **catch** is found, the **runtime** handles it
-*   In the browser, it is **onerror()**
-*   In Node.js, it is **process.on(‘uncaughtException’)**
-
-
+- **Error** types
+  - **Error**, general error
+  - **SyntaxError**, e.g. a misplaced comma
+  - **ReferenceError**, e.g. undefined variable
+- When an **Error** is thrown, it searches up the call-stack for a **catch**.
+- If no **catch** is found, the **runtime** handles it
+- In the browser, it is **onerror()**
+- In Node.js, it is **process.on(‘uncaughtException’)**
 
 <p id="gdcalert31" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image31.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert32">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image31.png "image_tooltip")
-
-
 
 #### try/catch/finally
 
+- **try/catch** blocks can be used to handle \_synchronous\*\* \*\*\_code
 
+      ```
 
-*   **try/catch** blocks can be used to handle _synchronous** **_code
+  function fail() {
+  try {
+  console.log("this works");
+  } catch (error) {
+  console.log("oops, error");
+  }
+  }
 
-    ```
-function fail() {
- try {
-   console.log("this works");
- } catch (error) {
-   console.log("oops, error");
- }
-}
 ````
 
     ```
@@ -2643,17 +2488,17 @@ console.log("oops, error"); //throws an error, "oops, error ReferenceError"
 
 ````
 
-
-
     ```
+
 function fail() {
- try {
-   console.log("this works"); //successfully logs because it is above the error
-   throw new Error('whoops!') //throws an error, looks for a catch
- } catch (error) {
-   console.log("We have an error", error); // "We have an error Error: whoops!
- }
+try {
+console.log("this works"); //successfully logs because it is above the error
+throw new Error('whoops!') //throws an error, looks for a catch
+} catch (error) {
+console.log("We have an error", error); // "We have an error Error: whoops!
 }
+}
+
 ````
 
 _finally_
@@ -2784,40 +2629,37 @@ Promise.resolve("asyncfail")
 
 ````
 
-
-
-
 #### Custom Errors
 
+- **Error** is a class and can be \_extended \_with the **extends** keyword to create **custom Errors**.
+- This can be useful for creating **secure Errors* by not displaying too much information.***
 
+      ```
 
-*   **Error** is a class and can be _extended _with the **extends** keyword to create **custom Errors**.
-*   This can be useful for creating **secure Errors_ by not displaying too much information._**
-
-    ```
-class DatabaseError extends Error {
- constructor(message) {
-   super(message);
-   this.name = "DatabaseError";
- }
-}
-class PermissionError extends Error {
- constructor(message) {
-   super(message);
-   this.name = "PermissionError";
- }
-}
+  class DatabaseError extends Error {
+  constructor(message) {
+  super(message);
+  this.name = "DatabaseError";
+  }
+  }
+  class PermissionError extends Error {
+  constructor(message) {
+  super(message);
+  this.name = "PermissionError";
+  }
+  }
 
 class AuthenticationError extends Error {
- constructor(message) {
-   super(message);
-   this.name = "AuthenticationError";
-   this.favoriteSnack = "grapes";
- }
+constructor(message) {
+super(message);
+this.name = "AuthenticationError";
+this.favoriteSnack = "grapes";
+}
 }
 const a = new AuthenticationError("snack");
 console.log(a.favoriteSnack); // grapes
 throw new AuthenticationError("oops"); // AuthenticationError: oops
+
 ````
 
 ---
@@ -3023,47 +2865,39 @@ export function jump() {
 
 ````
 
-
-*   When using modules in **script **tags, the **type** attribute should be **module**.
-*   When using **modules**, CORS policy applies and they must be served from a server proxy, e.g. [live-server](https://www.npmjs.com/package/live-server)
-
-
+- When using modules in **script **tags, the **type** attribute should be **module**.
+- When using **modules**, CORS policy applies and they must be served from a server proxy, e.g. [live-server](https://www.npmjs.com/package/live-server)
 
 <p id="gdcalert32" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image32.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert33">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
-
 ![alt_text](images/image32.png "image_tooltip")
 
-
 Default and named exports
-
 
 ####
 
 ---
 
-
-
 #### CommonJS
 
+- Created for server-side coding
+- Still used by Node.js
+- **Modules **are loaded _synchronously_
 
+  ```
+  //CommonJS and AMD
+  var module1 = require('module1') //.fight
+  var module2 = require('module2') //importedFunc2
+  ```
 
-*   Created for server-side coding
-*   Still used by Node.js
-*   **Modules **are loaded _synchronously_
+function fight(){
 
-    ```
- //CommonJS and AMD
- var module1 = require('module1') //.fight
- var module2 = require('module2') //importedFunc2
+}
 
- function fight(){
+module.exports ={
+fight: fight
+}
 
- }
-
- module.exports ={
-   fight: fight
- }
 ````
 
 - **Browserify** bundles all scripts in a single bundle.js while understanding the module syntax and maintaining separation
@@ -3390,3 +3224,4 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 <p id="gdcalert35" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image35.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert36">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image35.png "image_tooltip")
+````
