@@ -95,7 +95,7 @@ This guide is <span style="text-decoration:underline;">incomplete</span>! Please
 
 _How the JS engine works_
 
-![javascript engine](https://imgur.com/AOq7MU5)
+![javascript engine](https://i.imgur.com/AOq7MU5.png)
 
 - Parser
   - Lexical Analysis
