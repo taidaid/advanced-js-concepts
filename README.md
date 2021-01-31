@@ -111,9 +111,17 @@ _How the JS engine works_
 - Single-threaded
   - The call stack only executes one function at a time
   - We circumvent the limitations of ‘single-threadedness’ with the Web API
-- Gotchas
-  - Hidden classes
-    -- When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, e.g.
+- Hidden Classes - A Common "Gotcha"
+  - When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, the compiler will de-optimize the code.
+
+  - When compiling, the compiler tries to optimize the code, for example, by creating "**hidden classes**": [V8 Hidden class](https://engineering.linecorp.com/en/blog/v8-hidden-class/)
+    - There are cases where the code can be optimized by the compiler by _sharing _"**hidden classes**", but for some reason, such as a _different order of object property creation_, the compiler mistakenly thinks that two objects, which should be able to share "**hidden classes**", cannot. The compiler is thus creating an unnecessary inefficiency which we call "_de-optimizing the code_".
+  * Also see:
+    - [https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses](https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses)
+    - [The case of temporary objects in Chrome](https://benediktmeurer.de/2016/10/11/the-case-of-temporary-objects-in-chrome/)
+    - [Optimizing compiler](#bookmark=id.z8rggew72vka)
+  * This means that we should either set all possible properties in the constructor of a class
+  * Or we can be careful to always define new properties in the same order
 
 ```
   function Animal(x, y) {
@@ -128,17 +136,6 @@ _How the JS engine works_
   obj2.b = 2
   obj2.a = 1
 ```
-
-    the compiler will de-optimize the code
-
-        *   When compiling, the compiler tries to optimize the code, for example, by creating "**hidden classes**": [V8 Hidden class](https://engineering.linecorp.com/en/blog/v8-hidden-class/)
-        *   There are cases where the code can be optimized by the compiler by _sharing _"**hidden classes**", but for some reason, such as a _different order of object property creation_, the compiler mistakenly thinks that two objects, which should be able to share "**hidden classes**", cannot. The compiler is thus creating an unnecessary inefficiency which we call "_de-optimizing the code_".
-    *   Also see:
-        *   [https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses](https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses)
-        *   [The case of temporary objects in Chrome](https://benediktmeurer.de/2016/10/11/the-case-of-temporary-objects-in-chrome/)
-        *   [Optimizing compiler](#bookmark=id.z8rggew72vka)
-    *   This means that we should either set all possible properties in the constructor of a class
-    *   Or we can be careful to always define new properties in the same order
 
 ---
 
