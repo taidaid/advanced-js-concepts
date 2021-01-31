@@ -388,7 +388,7 @@ element.parentNode.removeChild(element);
 
 - Lexical environments means where the code was written.
 - The Global Environment is the parent environment to all other environments created in the code
-- In the browser, the global environment is\*\* **called **window\*\*
+- In the browser, the global environment is called **window**
 - In Node.js, the global environment is called **global**
 
 ####
