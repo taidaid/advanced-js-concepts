@@ -112,8 +112,8 @@ _How the JS engine works_
   - The call stack only executes one function at a time
   - We circumvent the limitations of ‘single-threadedness’ with the Web API
 - Gotchas
-  _ Hidden classes
-  _ When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, e.g.
+  - Hidden classes
+    -- When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, e.g.
 
 ```
   function Animal(x, y) {
@@ -1325,8 +1325,8 @@ ww3.totalPeaceTime()
 
 - The **prototype ** property only belongs to functions, specifically, **constructor** functions.
   - The **Object** **constructor** creates an object wrapper.
-- The ****proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types**
-  - **Object.create()** can be used to create **objects** with its ****proto** ** property linked to the **prototype **property of the object passed as **Object.create()**’s argument
+- The \***\*proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types\*\*
+  - **Object.create()** can be used to create **objects** with its \***\*proto** ** property linked to the **prototype **property of the object passed as **Object.create()\*\*’s argument
 - **Object** is the base **function** (constructor) \* The root of everything in JavaScript is **Object** which is actually a **function**
 
           ```
@@ -1441,7 +1441,7 @@ this
 #### Prototype
 
 - A **prototype **is a working **object** instance. Objects inherit directly from other objects.
-- ****proto**** is a reference to the parent object’s **prototype** property, e.g.
+- \***\*proto\*\*** is a reference to the parent object’s **prototype** property, e.g.
 
       ```
 
