@@ -30,7 +30,6 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 <p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 35.</p>
 <ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
 
-<a href="#gdcalert6">alert6</a>
 <a href="#gdcalert7">alert7</a>
 <a href="#gdcalert8">alert8</a>
 <a href="#gdcalert9">alert9</a>
@@ -304,16 +303,14 @@ function inception() {
 }
 ```
 
-            ```
-
+```
 const number = 6; //allocate memory for number
 const string = 'hello'; //allocate memory for a string
 const human = { //allocate memory for an object and its values
-first: 'Bryan',
-last: 'James'
+  first: 'Bryan',
+  last: 'James'
 }
-
-````
+```
 
 #####
 
@@ -3220,3 +3217,4 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 ```
 
 ```
+````
