@@ -112,10 +112,12 @@ _How the JS engine works_
   - The call stack only executes one function at a time
   - We circumvent the limitations of ‘single-threadedness’ with the Web API
 - Hidden Classes - A Common "Gotcha"
+
   - When instantiating new objects, the compiler will try to create a common ‘hidden class’. By defining properties in different orders, the compiler will de-optimize the code.
 
   - When compiling, the compiler tries to optimize the code, for example, by creating "**hidden classes**": [V8 Hidden class](https://engineering.linecorp.com/en/blog/v8-hidden-class/)
-    - There are cases where the code can be optimized by the compiler by _sharing _"**hidden classes**", but for some reason, such as a _different order of object property creation_, the compiler mistakenly thinks that two objects, which should be able to share "**hidden classes**", cannot. The compiler is thus creating an unnecessary inefficiency which we call "_de-optimizing the code_".
+    - There are cases where the code can be optimized by the compiler by _sharing_ "**hidden classes**", but for some reason, such as a _different order of object property creation_, the compiler mistakenly thinks that two objects, which should be able to share "**hidden classes**", cannot. The compiler is thus creating an unnecessary inefficiency which we call "_de-optimizing the code_".
+
   * Also see:
     - [https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses](https://marcradziwill.com/blog/mastering-javascript-high-performance/#hiddenclasses)
     - [The case of temporary objects in Chrome](https://benediktmeurer.de/2016/10/11/the-case-of-temporary-objects-in-chrome/)
@@ -125,8 +127,8 @@ _How the JS engine works_
 
 ```
   function Animal(x, y) {
-  this.x = x;
-  this.y = y;
+    this.x = x;
+    this.y = y;
   }
   const obj1 = new Animal(1,2)
   const obj2 = new Animal(3,4)
@@ -230,14 +232,12 @@ There are a lot of different kinds of optimizations, but I want to take a look a
 The dynamic type system that JavaScript uses requires a little bit of extra work at runtime. For example, consider this code:
 
 ```
-
 function arraySum(arr) {
-var sum = 0;
-for (var i = 0; i < arr.length; i++) {
-sum += arr[i];
+  var sum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
 }
-}
-
 ```
 
 The `+=` step in the loop may seem simple. It may seem like you can compute this in one step, but because of dynamic typing, it takes more steps than you would expect.
@@ -250,9 +250,7 @@ The way the JIT handles this is by compiling multiple baseline stubs. If a piece
 
 This means that the JIT has to ask a lot of questions before it chooses a stub.
 
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image6.png "image_tooltip")
+![JS JIT compiler Decision Tree](https://i.imgur.com/pW3JiZg.png "JS JIT compiler Decision Tree")
 
 Because each line of code has its own set of stubs in the baseline compiler, the JIT needs to keep checking the types each time the line of code is executed. So for each iteration through the loop, it will have to ask the same questions.
 
