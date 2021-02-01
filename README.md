@@ -796,25 +796,19 @@ var currentScope = 0; // global scope
 this
 ```
 
-- “**this**” is the object which the function is a property of
-- “**this**” gives functions access to their object and its properties
-- “**this**” helps us execute the same code for multiple objects
-- “**this**” can be thought of as “who called me?” i.e., what is to the left of the dot, such as window.a()
-- “**this**” is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
+- `this` is the object which the function is a property of
+- `this` gives functions access to their object and its properties
+- `this` helps us execute the same code for multiple objects
+- `this` can be thought of as **“who called me?”** i.e., what is to the left of the dot, such as `window.a()`
+- `this` is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
 
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+![example of this with function keyword](https://i.imgur.com/20NIFaf.png)
 
-![alt_text](images/image9.png "image_tooltip")
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image10.png "image_tooltip")
+![examples of this](https://i.imgur.com/lrGsahL.png)
 
 - **Arrow functions** bind “this” to the lexical scope
 
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image11.png "image_tooltip")
+![example of this with arrow function](https://i.imgur.com/Wtq6mHt.png)
 
 ##### call()
 
