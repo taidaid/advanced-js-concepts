@@ -829,7 +829,7 @@ console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
 
 ##### apply()
 
-- `apply()` is the same as** call()** except that **call()** takes* (&lt;object>, ...&lt;params>)* and `apply()` takes _(&lt;object>, &lt;[array of params]>)_
+- `apply()` is the same as `call()` except that `call()` takes _(&lt;object>, ...&lt;params>)_ and `apply()` takes _(&lt;object>, &lt;[array of params]>)_
 
 ##### bind()
 
@@ -839,11 +839,11 @@ console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
   _ The value to be passed as the `this` parameter to the target function when the bound function is called. The value is ignored if the bound function is constructed using the `new` operator. When using **bind** to create a function(supplied as a callback) inside a setTimeout, any **primitive** value passed as _thisArg_ is converted to `object`. If no arguments are provided to bind, the `this` of the executing scope is treated as the _thisArg_ for the new function. _arg1_, _arg2_, … Arguments to prepend to arguments provided to the bound function when invoking the target function.
 
 ```
-  Function.prototype.bind = function(whoIsCallingMe){
-  const self = this;
-  return function(){
-  return self.apply(whoIsCallingMe, arguments);
-  };
+  Function.prototype.bind = function(whoIsCallingMe) {
+    const self = this;
+    return function() {
+      return self.apply(whoIsCallingMe, arguments);
+    };
   }
 ```
 
