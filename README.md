@@ -30,7 +30,6 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 <p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 35.</p>
 <ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
 
-<a href="#gdcalert12">alert12</a>
 <a href="#gdcalert13">alert13</a>
 <a href="#gdcalert14">alert14</a>
 <a href="#gdcalert15">alert15</a>
