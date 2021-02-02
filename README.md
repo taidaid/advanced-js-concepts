@@ -849,23 +849,21 @@ console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
 
 - `bind()` is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
 
-      ```
-
-  var module = {
+```
+var module = {
   x: 42,
   getX: function() {
-  return this.x;
+    return this.x;
   }
-  }
-  var unboundGetX = module.getX;
-  console.log(unboundGetX()); // The function gets invoked at the global scope
-  // expected output: undefined
+}
+var unboundGetX = module.getX;
+console.log(unboundGetX()); // The function gets invoked at the global scope
+// expected output: undefined
 
 var boundGetX = unboundGetX.bind(module);
 console.log(boundGetX());
 // expected output: 42
-
-````
+```
 
 <p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -3216,4 +3214,7 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 ```
 
 ```
-````
+
+```
+
+```
