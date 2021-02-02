@@ -847,7 +847,7 @@ console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
   }
 ```
 
-- `bind()` is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
+- `bind()` is especially useful for remedying the **dynamic scope** property of `this` by binding it to a lexical scope
 
 ```
 var module = {
