@@ -61,7 +61,7 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 
 ### A reference guide for Advanced JavaScript Concepts
 
-This guide is <span style="text-decoration:underline;">incomplete</span>! Please **contact me** to add knowledge and ask questions. Sorry, but comments have been disabled, a few too many accidental edits/comments.
+This guide is <span style="text-decoration:underline;">incomplete</span>! Please submit a PR or issue to add knowledge or ask questions.
 
 [A Map for the Advanced JavaScript Concepts Course](https://coggle.it/diagram/XE3ZoVj-rtA5hcxj/t/advanced-javascript)
 
@@ -808,12 +808,25 @@ this
 ##### call()
 
 - function a() === function.call()
-- **call()** takes* (&lt;object>, ...&lt;params>)*
+- **call()** takes _(&lt;object>, ...&lt;params>)_
 - Calls a method of an object, substituting an object for the current object
 
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image12.png "image_tooltip")
+```
+const wizard = {
+  name: 'Merlin',
+  health: 50,
+  heal() {
+    return this.health = 100
+  }
+}
+const archer = {
+  name: 'Robin Hood',
+  health: 30
+}
+console.log('1', archer) // 1 { name: 'Robin Hood', health: 30 }
+wizard.heal.call(archer)
+console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
+```
 
 ##### apply()
 
@@ -821,7 +834,7 @@ this
 
 ##### bind()
 
-- The** bind()** method creates a new function that, when called, has its **_this _**keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+- The **bind()** method creates a new function that, when called, has its **_this _**keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
 - _function_.**bind**(_thisArg_[, _arg1_[, _arg2_[, ...]]])
   _ *thisArg*
   _ The value to be passed as the **this **parameter to the target function when the bound function is called. The value is ignored if the bound function is constructed using the **new **operator. When using **bind **to create a function(supplied as a callback) inside a setTimeout, any **primitive **value passed as _thisArg \_is converted to **object**. If no arguments are provided to bind, the **this **of the executing scope is treated as the \_thisArg \_for the new function. \* \_arg1_, _arg2_, … \* Arguments to prepend to arguments provided to the bound function when invoking the target function.
