@@ -829,27 +829,25 @@ console.log('2', archer) // 2 { name: 'Robin Hood', health: 100 }
 
 ##### apply()
 
-- **apply()** is the same as** call()** except that **call()** takes* (&lt;object>, ...&lt;params>)* and **apply()** takes _(&lt;object>, &lt;[array of params]>)_
+- `apply()` is the same as** call()** except that **call()** takes* (&lt;object>, ...&lt;params>)* and `apply()` takes _(&lt;object>, &lt;[array of params]>)_
 
 ##### bind()
 
-- The **bind()** method creates a new function that, when called, has its **_this _**keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+- The `bind()` method creates a new function that, when called, has its `this`keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
 - _function_.**bind**(_thisArg_[, _arg1_[, _arg2_[, ...]]])
   _ *thisArg*
-  _ The value to be passed as the **this **parameter to the target function when the bound function is called. The value is ignored if the bound function is constructed using the **new **operator. When using **bind **to create a function(supplied as a callback) inside a setTimeout, any **primitive **value passed as _thisArg \_is converted to **object**. If no arguments are provided to bind, the **this **of the executing scope is treated as the \_thisArg \_for the new function. \* \_arg1_, _arg2_, … \* Arguments to prepend to arguments provided to the bound function when invoking the target function.
+  _ The value to be passed as the `this` parameter to the target function when the bound function is called. The value is ignored if the bound function is constructed using the `new` operator. When using **bind** to create a function(supplied as a callback) inside a setTimeout, any **primitive** value passed as _thisArg_ is converted to `object`. If no arguments are provided to bind, the `this` of the executing scope is treated as the _thisArg_ for the new function. _arg1_, _arg2_, … Arguments to prepend to arguments provided to the bound function when invoking the target function.
 
-              ```
-
+```
   Function.prototype.bind = function(whoIsCallingMe){
   const self = this;
   return function(){
   return self.apply(whoIsCallingMe, arguments);
   };
   }
+```
 
-````
-
-- **bind()** is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
+- `bind()` is especially useful for remedying the **dynamic scope** property of **_this_** by binding it to a lexical scope
 
       ```
 
@@ -1385,11 +1383,11 @@ this
 
 ````
 
-- “**this**” is the object which the function is a property of
-- “**this**” gives functions access to their object and its properties
-- “**this**” helps us execute the same code for multiple objects
-- “**this**” can be thought of as “who called me?” i.e., what is to the left of the dot, such as window.a()
-- “**this**” is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
+- `this` is the object which the function is a property of
+- `this` gives functions access to their object and its properties
+- `this` helps us execute the same code for multiple objects
+- `this` can be thought of as “who called me?” i.e., what is to the left of the dot, such as window.a()
+- `this` is **dynamically scoped**, i.e. it doesn’t matter where it was written, it matters where it was called
 
 <p id="gdcalert18" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image18.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert19">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -1481,7 +1479,7 @@ typeof Object.prototype // "object"
 #### Object.create() vs. Classes
 
 - Both **Object.create()** and **class **are ways to create a **prototype chain**
-- Some people prefer to avoid the **constructor**, **class**, and **this **keywords as much as possible to limit confusion due to **this**
+- Some people prefer to avoid the **constructor**, **class**, and **this **keywords as much as possible to limit confusion due to `this`
 - Some people prefer to use the **constructor**, **class**, and **this **keywords, perhaps because of its similarity to other languages with the Object-Oriented Programming paradigm
 
 ####
@@ -3218,3 +3216,4 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 ```
 
 ```
+````
