@@ -944,40 +944,33 @@ var script1 = (function () {
 - **Statically typed** means the type is enforced and won’t change so easily. All variables must be declared with a type.
 - **Static Typing** is exemplified by C++ and Java’s use of variable declaration
 
-      ```
-
-  int a == 100 // explicitly declares the value type as integer
-
-````
+```
+int a == 100 // explicitly declares the value type as integer
+```
 
 - **Dynamically typed** languages infer variable types at runtime. This means once your code is run the compiler/interpreter will see your variable and its value then decide what type it is. The type is still enforced here, it just decides what the type is.
-- **Dynamic Typing **is exemplified by JavaScript’s use of ‘var, const, let’ to declare variables. The compiler takes responsibility for determining the type of the value
+- **Dynamic Typing** is exemplified by JavaScript’s use of ‘var, const, let’ to declare variables. The compiler takes responsibility for determining the type of the value
 
-      ```
+```
+let a = 100 // compiler determines it is an integer
+```
 
-  let a = 100 // compiler determines it is an integer
+- Strong vs Weak Typing: **Strong Typing** _does not_ allow different value types to interact, e.g.
 
-````
+```
+var hello = 'hello'
+hello + 17 // ERROR
+```
 
-- Strong vs Weak Typing \* **Strong Typing** _does not_ allow different value types to interact, e.g.
+- **Weak Typing** _does_ allow different value types to interact, e.g. **coercing **an integer into its string equivalent when interacting with a string
 
-          ```
-
-  var hello = 'hello'
-  hello + 17 // ERROR
-
-````
-
-    *   **Weak Typing** _does_ allow different value types to interact, e.g. **coercing **an integer into its string equivalent when interacting with a string
-
-        ```
-
+```
 var hello = 'hello'
 hello + 17 // 'hello17'
 
-````
+```
 
-    *   **Weakly typed** languages allow types to be inferred as another type. For example, 1 + '2' // '12' In JS it sees you’re trying to add a number with a string — an invalid operation — so it coerces your number into a string and results in the string ‘12’.
+- **Weakly typed** languages allow types to be inferred as another type. For example, 1 + '2' // '12' In JS it sees you’re trying to add a number with a string — an invalid operation — so it coerces your number into a string and results in the string ‘12’.
 
 <p id="gdcalert14" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image14.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert15">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -3185,6 +3178,10 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 <p id="gdcalert35" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image35.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert36">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image35.png "image_tooltip")
+
+```
+
+```
 
 ```
 
