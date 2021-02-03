@@ -30,7 +30,6 @@ H6 not demoted to H7. Look for "H6 not demoted to H7." inline.
 <p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 35.</p>
 <ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
 
-<a href="#gdcalert13">alert13</a>
 <a href="#gdcalert14">alert14</a>
 <a href="#gdcalert15">alert15</a>
 <a href="#gdcalert16">alert16</a>
@@ -865,10 +864,6 @@ console.log(boundGetX());
 // expected output: 42
 ```
 
-<p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image13.png "image_tooltip")
-
 ---
 
 #### Functions Expressions vs Function Statements
@@ -876,71 +871,55 @@ console.log(boundGetX());
 - An **expression **produces a value and can be written wherever a value is expected, for example as an argument in a function call
 - Each line below is an expression
 
-      ```
+```
+myvar
+3 + x
+myfunc("a", "b")
+```
 
-  myvar
-  3 + x
-  myfunc("a", "b")
-
-````
-
-- Roughly, a **statement **performs an action. **Loops **and **if statements** are examples of statements. A program is basically a sequence of statements (we’re ignoring declarations here). Wherever JavaScript expects a statement, you can also write an expression. Such a statement is called an _expression statement_. The reverse does not hold: you cannot write a statement where JavaScript expects an expression. For example, an if statement cannot become the argument of a function.
+- Roughly speaking, a **statement** performs an action. **Loops** and **if statements** are examples of statements. A program is basically a sequence of statements (we’re ignoring declarations here). Wherever JavaScript expects a statement, you can also write an expression. Such a statement is called an _expression statement_. The reverse does not hold: you cannot write a statement where JavaScript expects an expression. For example, an if statement cannot become the argument of a function.
 - **Expression**: produces a value
 - **Statement**: performs an action
 - **Expression statement**: produces a value and performs an action
-- The following is an example of an **\_if \_statement**:
+- The following is an example of an **if statement**:
 
-      ```
-
-  var x;
-  if (y >= 0) {
+```
+var x;
+if (y >= 0) {
   x = y;
-  } else {
+} else {
   x = -y;
-  }
-
-````
+}
+```
 
 - Expressions have an analog, the conditional operator. The above statements are equivalent to the following statement.
 
-      ```
-
-  var x = (y >= 0 ? y : -y);
-
 ```
-
-
-
-
+var x = (y >= 0 ? y : -y);
+```
 
 ---
 
-
-
 #### IIFE
 
-
 ```
-
 (function () {})() === (function (){}())
 // undefined === undefined
 
-````
+```
 
 - **Immediately Invoked Function Expressions** have been used in the past, before modules, to avoid polluting the namespace. It does this by limiting the scope of variables in the function to the function scope
 
-      ```
-
-  var script1 = (function () {
+```
+var script1 = (function () {
   function a() {
-  return 5;
+    return 5;
   }
-  return {
-  a: a
-  }
-  })()
-
-````
+    return {
+      a: a
+    }
+})()
+```
 
 #### Use Strict
 
