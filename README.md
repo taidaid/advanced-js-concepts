@@ -980,29 +980,15 @@ hello + 17 // 'hello17'
 
 #### Primitive Types
 
-- A **primitive **is not an object and has no methods of its own. All primitives are immutable.
-- **Boolean** — true\*\* \*\*or false
+- A **primitive** is not an object and has no methods of its own. All primitives are immutable.
+- **Boolean** — *true* or _false_
 - **Null** — no value
 - **Undefined** — a declared variable but hasn’t been given a value
 - **Number** — integers, floats, etc
 - **String** — an array of characters, i.e words
-- **Symbol **— a unique value that's not equal to any other value
+- **Symbol** — a unique value that's not equal to any other value
 - **Everything else is an Object type.**
-- **Primitives **are wrapped in objects
-
-      ```
-
-  true.toString() === 'true'
-
-````
-
-- It works some like the below:
-
-      ```
-
-  Boolean(true).toString() === 'true'
-
-````
+- **Primitives** are wrapped in objects
 
 ---
 
@@ -1012,61 +998,50 @@ hello + 17 // 'hello17'
 
 - **Pass by Value** is used with primitives
 
-      ```
-
-  let a = 5;
-  let b = 6;
-  a = 7;
-  console.log(a) // 7
-  console.log(b) // 6
-
-````
+```
+let a = 5;
+let b = 6;
+a = 7;
+console.log(a) // 7
+console.log(b) // 6
+```
 
 - **Pass by Reference** is used with objects
 
-      ```
-
-  let a = {a: 1, b: 2}
-  let b = a;
-  a.b = 3;
-  console.log(a) // {a: 1, b: 3}
-  console.log(b) // {a: 1, b: 3}
-
-````
+```
+let a = {a: 1, b: 2}
+let b = a;
+a.b = 3;
+console.log(a) // {a: 1, b: 3}
+console.log(b) // {a: 1, b: 3}
+```
 
 - To **shallow clone** an object we can use **Object.assign **or the **rest operator**
 
-      ```
-
-  let a = {a:1, b:2}
-  let b = Object.assign({}, a} // with rest operator {...a}
-
+```
+let a = {a:1, b:2}
+let b = Object.assign({}, a} // with rest operator {...a}
 a.b = 3;
 console.log(a) // {a:1, b:3}
 console.log(b) // {a:1, b:2}
-
-````
+```
 
 - To clone an array, we can use:
 
-      ```
+```
+let a = [1,2,3]
+let b = [].concat(a)
+a[0] = 5
+console.log(a) // [5,2,3]
+console.log(b) // [1,2,3]
+```
 
-  let a = [1,2,3]
-  let b = [].concat(a)
-  a[0] = 5
-  console.log(a) // [5,2,3]
-  console.log(b) // [1,2,3]
+- To **deep clone** an object we need to **stringify** and **parse** with **JSON**. This is because of **pass by reference**, when objects are declared, a memory location, “**reference**”, is passed, rather than the object value being copied.
 
-````
-
-- To **deep clone** an object we need to **stringify **and **parse **with **JSON** \* This is because of **pass by reference**, when objects are declared, a memory location, “**reference**”, is passed, rather than the object value being copied.
-
-          ```
-
-  let a = {a:1, b: { c: 3}}
-  let deepClone = JSON.parse(JSON.stringify(a))
-
-````
+```
+let a = {a:1, b: { c: 3}}
+let deepClone = JSON.parse(JSON.stringify(a))
+```
 
 ---
 
@@ -3194,3 +3169,4 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 ```
 
 ```
+````
