@@ -1056,19 +1056,18 @@ let deepClone = JSON.parse(JSON.stringify(a))
 
 - JavaScript provides three different value-comparison operations:
   - **===** - Strict Equality Comparison ("strict equality", "identity", "triple equals")
-  - **== **- Abstract Equality Comparison ("loose equality", "double equals")
+  - **==** - Abstract Equality Comparison ("loose equality", "double equals")
   - **Object.is** provides SameValue (new in ES2015).
 - Which operation you choose depends on what sort of comparison you are looking to perform. Briefly:
-  _ double equals (==) will perform a type conversion when comparing two things, and will handle NaN, -0, and +0 specially to conform to IEEE 754 (so NaN != NaN, and -0 == +0);
-  _ triple equals (===) will do the same comparison as double equals (including the special handling for NaN, -0, and +0) but without type conversion; if the types differ, false is returned. \* Object.is does no type conversion and no special handling for NaN, -0, and +0 (giving it the same behavior as === except on those special numeric values).
+  - double equals (==) will perform a type conversion when comparing two things, and will handle NaN, -0, and +0 specially to conform to IEEE 754 (so NaN != NaN, and -0 == +0);
+  - triple equals (===) will do the same comparison as double equals (including the special handling for NaN, -0, and +0) but without type conversion; if the types differ, false is returned.
+  - Object.is does no type conversion and no special handling for NaN, -0, and +0 (giving it the same behavior as === except on those special numeric values).
 
-          ```
-
-  1 == "1" // true
-  1 === 1 // false
-  NaN === NaN // false
-
-````
+```
+1 == "1" // true
+1 === 1 // false
+NaN === NaN // false
+```
 
 <p id="gdcalert16" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert17">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -1087,30 +1086,28 @@ let deepClone = JSON.parse(JSON.stringify(a))
 ##### Dot Notation vs. Bracket Notation
 
 - Both can be used to access **properties **of an **object** using the **key**
-- **Dot Notation** \* When working with **dot notation**, property **keys** can only be alphanumeric (and \_ and $). It can’t start with a number.
+- **Dot Notation**
+  - When working with **dot notation**, property **keys** can only be alphanumeric (and \_ and $). It can’t start with a number.
 
-          ```
-
-  let obj = {
+```
+let obj = {
   cat: 'meow',
   dog: 'woof'
-  };
-  let sound = obj.cat;
-  console.log(sound);
-  // meow
+};
+let sound = obj.cat;
+console.log(sound);
+// meow
+```
 
-````
+- **Bracket Notation**
+  - When working with **bracket notation**, property **keys** only have to be a **String**. They can include _any characters_, including spaces. _Variables_ may also be used _as long as the variable resolves to a_ **String**.
 
-- **Bracket Notation** \* When working with **bracket notation**, property **keys** only have to be a **String**. They can include _any characters_, including spaces. _Variables \_may also be used \_as long as the variable resolves to a_ **String**.
-
-          ```
-
-  let arr = ['a','b','c'];
-  let letter = arr[1];
-  console.log(letter);
-  // b
-
-````
+```
+let arr = ['a','b','c'];
+let letter = arr[1];
+console.log(letter);
+// b
+```
 
 ---
 
@@ -1126,19 +1123,19 @@ let deepClone = JSON.parse(JSON.stringify(a))
 
 ##### Functions vs. Objects
 
-- **Functions **are **callable objects**
+- **Functions** are **callable objects**
 
 <p id="gdcalert17" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image17.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert18">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image17.png "image_tooltip")
 
-- **Functions **are first class citizens. **Functions **are:
+- **Functions** are first class citizens. **Functions** are:
   - Assignable to variables
   - Able to be passed as arguments
   - Able to be returned from functions
 - Beware:
-  - Initializing **functions **in loops
-  - Declaring **functions **with parameters without defaults
+  - Initializing **functions** in loops
+  - Declaring **functions** with parameters without defaults
     - **Set parameter defaults!**
 
 ---
@@ -1154,51 +1151,46 @@ let deepClone = JSON.parse(JSON.stringify(a))
 - **Closure** allows access to variables within its lexical scope, including the variables of parents which have been removed from the **call stack** by determining which variables will be needed by child functions and retaining them in memory.
 - **Closures** are like objects in that they are a mechanism for containing **state**
 
-      ```
-
-  //Closure
-  const closure = function() {
+```
+//Closure
+const closure = function() {
   let count = 0;
   return function increment() {
-  count++;
-  return count;
+    count++;
+    return count;
   }
-  }
+}
 
 const incrementFn = closure()
 incrementFn() //1
 incrementFn() //2
 incrementFn() //3
-
-````
+```
 
 - Memory Efficient \* By using **closures**, we can create variables that are stored in memory to be used in the future
 
-          ```
-
-  const closureTest1 = (function() {
+```
+const closureTest1 = (function() {
   const bigArray = new Array(7000).fill('1')
   console.log('created')
   return function(index) {
-  return bigArray[index]
+    return bigArray[index]
   }
-  })()
-  closureTest1(500)
-  closureTest1(300)
-  closureTest1(100)
-  created //from console.log('created')
-  //returned "1"
+})()
+closureTest1(500)
+closureTest1(300)
+closureTest1(100)
+created //from console.log('created')
+//returned "1"
+```
 
-````
+- A typical case without **closure** would cause the variable to be created and stored again each time it is needed. This is memory _inefficient_.
 
-    *   A typical case without **closure **would cause the variable to be created and stored again each time it is needed. This is memory _inefficient_.
-
-        ```
-
+```
 function closureTest(index) {
-const bigArray = new Array(7000).fill('1')
-console.log('created')
-return bigArray[index]
+  const bigArray = new Array(7000).fill('1')
+  console.log('created')
+  return bigArray[index]
 }
 closureTest(500)
 closureTest(300)
@@ -1207,34 +1199,31 @@ created //from console.log('created')
 created //from console.log('created')
 created //from console.log('created')
 // returned "1"
-
-````
+```
 
 [[JavaScript Function Closures](https://www.w3schools.com/js/js_function_closures.asp)]
 
 - Encapsulation
-  _ **Encapsulation** allows us to hide/show properties of functions
-  _ In the below example, we don’t want to expose the \_launch \_variable, so we do not return it
+  - **Encapsulation** allows us to hide/show properties of functions
+  - In the below example, we don’t want to expose the _launch_ variable, so we do not return it
 
-          ```
-
-  const makeNuclearButton = () => {
+```
+const makeNuclearButton = () => {
   let timeWithoutDestruction = 0;
   const passTime = () => timeWithoutDestruction++;
   const totalPeaceTime = () => timeWithoutDestruction;
   const launch = () => {
-  timeWithoutDestruction = -1;
-  return '💥';
+    timeWithoutDestruction = -1;
+    return '💥';
   }
 
 setInterval(passTime, 1000);
-return {totalPeaceTime}
+  return {totalPeaceTime}
 }
 
 const ww3 = makeNuclearButton();
 ww3.totalPeaceTime()
-
-````
+```
 
 [[Encapsulation in JavaScript - Software Consulting](https://www.intertech.com/Blog/encapsulation-in-javascript/)]
 
@@ -1243,90 +1232,67 @@ ww3.totalPeaceTime()
 ##### Prototypal Inheritance
 
 - A prototype is a working **object** instance. Objects inherit directly from other objects.
-- \***\*proto\*\*** is a reference to the parent object’s **prototype** property, e.g.
-
-      ```
-
-  const obj = {}
-  obj.**proto** === Object.prototype // true
-
-````
-
-- The **prototype ** property only belongs to functions, specifically, **constructor** functions.
-  - The **Object** **constructor** creates an object wrapper.
-- The \***\*proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types\*\*
-  - **Object.create()** can be used to create **objects** with its \***\*proto** ** property linked to the **prototype **property of the object passed as **Object.create()\*\*’s argument
-- **Object** is the base **function** (constructor) \* The root of everything in JavaScript is **Object** which is actually a **function**
-
-          ```
-
-  typeof Object //"function"
-
-````
-
-    *   **Object **has the property **prototype** which is the **base object** for all things in JavaScript, including JavaScript functions
-
-        ```
-
-typeof Object.prototype // "object"
+- **proto** is a reference to the parent object’s **prototype** property, e.g.
 
 ```
+const obj = {}
+obj.**proto** === Object.prototype // true
+```
 
+- The **prototype** property only belongs to functions, specifically, **constructor** functions.
+  - The **Object constructor** creates an object wrapper.
+- The **proto** and **prototype** properties are used to create a chain of **inheritance** of properties between objects, beginning with **Object** and **Primitive Types**
+  - **Object.create()** can be used to create **objects** with its **proto** property linked to the **prototype** property of the object passed as **Object.create()**’s argument
+- **Object** is the base **function** (constructor)
+  - The root of everything in JavaScript is **Object** which is actually a **function**
 
+```
+typeof Object //"function"
+```
 
+- **Object** has the property **prototype** which is the **base object** for all things in JavaScript, including JavaScript functions
 
+```
+typeof Object.prototype // "object"
+```
 
 ---
 
-
-
 ## Object-Oriented Programming vs. Functional Programming
-
 
 ### OOP vs. FP
 
-
 #### Object-Oriented Programming (OOP)
 
-
-
-*   Organizing the code into units
-*   An **object **is a box containing information (**state/attributes**) and operations (**methods**) that refer to the same concept, _what it is_
-*   **Objects **are **first-class citizens**
-*   Few operations on common data
-*   Very “stateful”, we modify state
-*   More **imperative**
-*   Better with many _things_ and fewer _operations_
-
+- Organizing the code into units
+- An **object** is a box containing information (**state/attributes**) and operations (**methods**) that refer to the same concept, _what it is_
+- **Objects** are **first-class citizens**
+- Few operations on common data
+- Very “stateful”, we modify state
+- More **imperative**
+- Better with many _things_ and fewer _operations_
 
 #### Functional Programming (FP)
 
-
-
-*   A combination of functions
-*   Avoiding **side-effects**
-*   **Immutable **state
-*   **Pure functions**
-*   Functions are **first-class citizens**
-*   **Composition** is more common than procedural actions, e.g. loops, iterations, and if-else
-*   Manipulate data structures like trees, array, and objects
-*   Performing many operations for which the data is fixed
-*   Can run better in parallel processes due to fewer **side-effects**
-*   More **declarative**
-*   Good at processing large data for apps
-
+- A combination of functions
+- Avoiding **side-effects**
+- **Immutable** state
+- **Pure functions**
+- Functions are **first-class citizens**
+- **Composition** is more common than procedural actions, e.g. loops, iterations, and if-else
+- Manipulate data structures like trees, array, and objects
+- Performing many operations for which the data is fixed
+- Can run better in parallel processes due to fewer **side-effects**
+- More **declarative**
+- Good at processing large data for apps
 
 ### Object Oriented Programming
 
-
 #### “this” keyword
 
-
 ```
-
 this
-
-````
+```
 
 - `this` is the object which the function is a property of
 - `this` gives functions access to their object and its properties
@@ -3153,6 +3119,10 @@ This document has been created as a supplement to the Udemy course [Advanced Jav
 <p id="gdcalert35" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image35.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert36">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image35.png "image_tooltip")
+
+```
+
+```
 
 ```
 
