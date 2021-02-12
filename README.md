@@ -1335,35 +1335,30 @@ this
 
 #### Prototype
 
-- A **prototype **is a working **object** instance. Objects inherit directly from other objects.
-- \***\*proto\*\*** is a reference to the parent object’s **prototype** property, e.g.
+- A **prototype** is a working **object** instance. Objects inherit directly from other objects.
+- `proto` is a reference to the parent object’s `prototype` property, e.g.
 
-      ```
+```
+const obj = {}
+obj.**proto** === Object.prototype // true
+```
 
-  const obj = {}
-  obj.**proto** === Object.prototype // true
+- The `prototype` property only belongs to functions, specifically, `constructor` functions.
+  - The **Object constructor** creates an object wrapper.
+- The `proto`  and `prototype` properties are used to create a chain of **inheritance** of properties between objects, beginning with **Object** and **Primitive Types**
+  - `Object.create()` can be used to create **objects** with its `proto` ** property linked to the `prototype` property of the object passed as `Object.create()`’s argument
+- **Object** is the base **function** (`constructor`) 
+  - The root of everything in JavaScript is `Object` which is actually a **function**
 
-````
+```
+typeof Object //"function"
+```
 
-- The **prototype ** property only belongs to functions, specifically, **constructor** functions.
-  - The **Object** **constructor** creates an object wrapper.
-- The \***\*proto** ** and **prototype** properties are used to create a chain of **inheritance **of properties between objects, beginning with **Object** and **Primitive Types\*\*
-  - **Object.create()** can be used to create **objects** with its \***\*proto** ** property linked to the **prototype **property of the object passed as **Object.create()\*\*’s argument
-- **Object** is the base **function** (constructor) \* The root of everything in JavaScript is **Object** which is actually a **function**
+- `Object` has the property `prototype` which is the **base object** for all things in JavaScript, including JavaScript functions
 
-          ```
-
-  typeof Object //"function"
-
-````
-
-    *   **Object **has the property **prototype** which is the **base object** for all things in JavaScript, including JavaScript functions
-
-        ```
-
+```
 typeof Object.prototype // "object"
-
-````
+```
 
 ####
 
